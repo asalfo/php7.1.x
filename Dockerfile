@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       && ./configure --prefix=/usr/local \
       && make && make install \
       && docker-php-ext-configure intl --with-icu-dir=/usr/local \
-      && docker-php-ext-install pdo pdo_mysql opcache intl sockets mbstring bcmath \
+      && docker-php-ext-install zip pdo pdo_mysql opcache intl sockets mbstring bcmath \
       && a2enmod rewrite \
       && pecl install xdebug \
       && docker-php-ext-enable xdebug \
