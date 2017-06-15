@@ -3,6 +3,7 @@ MAINTAINER Salif Guigma <salif.guigma@gmail.com>
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
       libicu-dev \
+      zlib1g-dev\
       vim \
       git \
       && apt-get clean \
