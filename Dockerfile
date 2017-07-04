@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       zlib1g-dev\
       vim \
       git \
+      clang \
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/* \
       && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
@@ -17,6 +18,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       && cd /tmp/icu/source \
       && ./configure --prefix=/usr/local \
       && make && make install \
+      && curl -sS -o /tmp/node-v6.11.0.tar.gz -L https://nodejs.org/dist/v6.11.0/node-v6.11.0.tar.gz \
+      && tar -zxf /tmp/node-v6.11.0.tar.gz -C /tmp \
+      && cd /tmp/node-v6.11.0 \
+      && ./configure \
+      && make -j4 \
+      && make install \
       && docker-php-ext-configure intl --with-icu-dir=/usr/local \
       && docker-php-ext-install zip pdo pdo_mysql opcache intl sockets mbstring bcmath \
       && a2enmod rewrite \
@@ -24,7 +31,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       && docker-php-ext-enable xdebug \
       && pecl install apcu \
       && pecl clear-cache \
-      && echo "zend_extension=/usr/local/lib/php/extensions/no-debug-non-zts-20131226/xdebug.so" > /usr/local/etc/php/conf.d/xdebug.ini \
       && version=$(php -r "echo PHP_MAJOR_VERSION.PHP_MINOR_VERSION;") \
       && curl -A "Docker" -o /tmp/blackfire-probe.tar.gz -D - -L -s https://blackfire.io/api/v1/releases/probe/php/linux/amd64/$version \
       && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp \
@@ -39,3 +45,4 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       && usermod -u 1000 www-data \
       && groupmod -g 1000 www-data \
       && usermod -s /bin/bash www-data \
+      && rm -rf /tmp/*
