@@ -1,12 +1,15 @@
 From php:7.1.5-apache
 MAINTAINER Salif Guigma <salif.guigma@gmail.com>
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+RUN   curl -sL https://deb.nodesource.com/setup_8.x | bash - \
+      && apt-get update && apt-get install -y --no-install-recommends \
       libicu-dev \
-      zlib1g-dev\
+      zlib1g-dev \
+      build-essential \
       vim \
       git \
       clang \
+      nodejs \
       && apt-get clean \
       && rm -rf /var/lib/apt/lists/* \
       && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
@@ -18,12 +21,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
       && cd /tmp/icu/source \
       && ./configure --prefix=/usr/local \
       && make && make install \
-      && curl -sS -o /tmp/node-v6.11.0.tar.gz -L https://nodejs.org/dist/v6.11.0/node-v6.11.0.tar.gz \
-      && tar -zxf /tmp/node-v6.11.0.tar.gz -C /tmp \
-      && cd /tmp/node-v6.11.0 \
-      && ./configure \
-      && make -j4 \
-      && make install \
       && docker-php-ext-configure intl --with-icu-dir=/usr/local \
       && docker-php-ext-install zip pdo pdo_mysql opcache intl sockets mbstring bcmath \
       && a2enmod rewrite \
