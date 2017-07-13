@@ -33,6 +33,7 @@ RUN   curl -sL https://deb.nodesource.com/setup_8.x | bash - \
       && tar zxpf /tmp/blackfire-probe.tar.gz -C /tmp \
       && mv /tmp/blackfire-*.so $(php -r "echo ini_get('extension_dir');")/blackfire.so \
       && printf "extension=blackfire.so\nblackfire.agent_socket=tcp://blackfire:8707\n" > $PHP_INI_DIR/conf.d/blackfire.ini \
+      && cd /tmp && wget https://phar.phpunit.de/phpunit-6.1.phar && chmod +x phpunit-6.1.phar && mv phpunit-6.1.phar /usr/local/bin/phpunit \
       && echo "date.timezone = Europe/Madrid" >> $PHP_INI_DIR/conf.d/php.ini \
       && echo "short_open_tag = Off" >> $PHP_INI_DIR/conf.d/php.ini \
       && echo "memory_limit = 128M" >> $PHP_INI_DIR/conf.d/php.ini \
