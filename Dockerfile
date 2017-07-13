@@ -8,6 +8,7 @@ RUN   curl -sL https://deb.nodesource.com/setup_8.x | bash - \
       build-essential \
       vim \
       git \
+      wget \
       clang \
       nodejs \
       && apt-get clean \
