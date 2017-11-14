@@ -6,6 +6,7 @@ RUN   curl -sL https://deb.nodesource.com/setup_8.x | bash - \
       libicu-dev \
       zlib1g-dev \
       build-essential \
+      libpng12-dev \
       vim \
       git \
       wget \
@@ -23,7 +24,7 @@ RUN   curl -sL https://deb.nodesource.com/setup_8.x | bash - \
       && ./configure --prefix=/usr/local \
       && make && make install \
       && docker-php-ext-configure intl --with-icu-dir=/usr/local \
-      && docker-php-ext-install zip pdo pdo_mysql opcache intl sockets mbstring bcmath \
+      && docker-php-ext-install zip pdo pdo_mysql opcache intl sockets mbstring bcmath gd \
       && a2enmod rewrite \
       && pecl install xdebug \
       && docker-php-ext-enable xdebug \
