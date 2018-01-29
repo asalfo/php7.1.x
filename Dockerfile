@@ -26,7 +26,9 @@ RUN   curl -sL https://deb.nodesource.com/setup_8.x | bash - \
       && ./configure --prefix=/usr/local \
       && make && make install \
       && docker-php-ext-configure intl --with-icu-dir=/usr/local \
-      && docker-php-ext-install zip pdo pdo_mysql opcache intl sockets mbstring bcmath gd \
+      && docker-php-ext-install zip pdo pdo_mysql opcache intl sockets mbstring bcmath \
+      && docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ \
+      && docker-php-ext-install -j$(nproc) gd \
       && a2enmod rewrite \
       && pecl install xdebug \
       && docker-php-ext-enable xdebug \
