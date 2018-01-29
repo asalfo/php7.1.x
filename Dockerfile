@@ -7,6 +7,8 @@ RUN   curl -sL https://deb.nodesource.com/setup_8.x | bash - \
       zlib1g-dev \
       build-essential \
       libpng12-dev \
+      libjpeg-dev \
+      libfreetype6-dev \
       vim \
       git \
       wget \
