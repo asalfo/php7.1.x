@@ -42,7 +42,10 @@ RUN   curl -sL https://deb.nodesource.com/setup_8.x | bash - \
       && cd /tmp && wget https://phar.phpunit.de/phpunit-6.1.phar && chmod +x phpunit-6.1.phar && mv phpunit-6.1.phar /usr/local/bin/phpunit \
       && echo "date.timezone = Europe/Madrid" >> $PHP_INI_DIR/conf.d/php.ini \
       && echo "short_open_tag = Off" >> $PHP_INI_DIR/conf.d/php.ini \
-      && echo "memory_limit = 128M" >> $PHP_INI_DIR/conf.d/php.ini \
+      && echo "memory_limit = 256M" >> $PHP_INI_DIR/conf.d/php.ini \
+      && echo "log_errors = On" >> $PHP_INI_DIR/conf.d/php.ini \
+      && echo "error_log = /dev/stderr" >> $PHP_INI_DIR/conf.d/php.ini \
+      && echo "short_open_tag = Off" >> $PHP_INI_DIR/conf.d/php.ini \
       && echo "xdebug.remote_enable=On" >> $PHP_INI_DIR/conf.d/xdebug.ini \
       && echo "xdebug.remote_autostart=1" >> $PHP_INI_DIR/conf.d/xdebug.ini \
       && echo "xdebug.remote_port=9000" >> $PHP_INI_DIR/conf.d/xdebug.ini \
